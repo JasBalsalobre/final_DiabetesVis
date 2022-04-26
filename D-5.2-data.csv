@@ -1,0 +1,77 @@
+﻿,,2005-2008,,,,2009-2012,,,,2013-2016,,,
+PopTitle,Geography,Estimate,StdErr,LowerCI,UpperCI,Estimate,StdErr,LowerCI,UpperCI,Estimate,StdErr,LowerCI,UpperCI
+Total,United States,53.1,2.817,47.4,58.8,48.2,3.616,40.9,55.5,50.6,2.327,45.9,55.3
+Sex,,,,,,,,,,,,,
+   Male,United States,49.6,3.752,42,57.2,42.6,4.675,33.5,52.3,49.5,4.277,40.9,58.2
+   Female,United States,56.5,3.434,49.4,63.4,54.3,4.594,44.9,63.4,51.9,2.661,46.4,57.3
+Race/Ethnicity,,,,,,,,,,,,,
+   Hispanic or Latino,United States,DSU,,,,38.1,5.258,27.8,49.5,43.9,5.204,33.6,54.7
+      Mexican American,United States,42.6,4.226,33.9,51.7,34,6.287,21.9,48.7,39,5.519,28.2,51
+   Not Hispanic or Latino,United States,---,0,0,0,---,0,0,0,---,0,0,0
+"      Asian only, not Hispanic or Latino",United States,,,,,,,,,54.1,5.369,42.8,65
+"      Black or African American only, not Hispanic or Latino",United States,46.8,3.64,39.4,54.4,47.2,4.998,37.1,57.6,42.2,2.982,36.2,48.5
+"      White only, not Hispanic or Latino",United States,54.8,3.564,47.4,62,52.8,5.286,42,63.3,57.6,4.052,49.1,65.6
+Age group† §,,,,,,,,,,,,,
+   18-44 years,United States,48.9,5.741,37.3,60.6,41,6.876,27.9,55.5,53.3,3.682,45.8,60.8
+      18-24 years,United States,DSU,,,,DSU,,,,DSU,,,
+      25-44 years,United States,49.7,6.111,37.3,62.2,39.8,7.142,26.4,55.1,52.7,4.006,44.4,60.7
+   45-64 years,United States,50.7,3.062,44.5,56.9,48.5,3.134,42.2,54.9,45.3,2.511,40.2,50.4
+      45-54 years,United States,50.8,5.03,40.6,60.9,48.4,3.435,41.4,55.4,46.6,3.625,39.3,54
+      55-64 years,United States,50.7,3.685,43.2,58.1,48.6,4.099,40.3,56.9,44.5,3.164,38.1,51
+   65 years and over,United States,60.9,3.766,53,68.2,60.4,3.003,54.2,66.3,54.4,2.871,48.5,60.2
+      65-74 years,United States,58.9,4.423,49.6,67.5,58.7,3.612,51.3,65.9,53.1,3.243,46.4,59.6
+      75-79 years,United States,62.6,8.298,44.1,78,59.7,5.265,48.5,70,59.9,6.395,46.1,72.3
+      80 years and over,United States,64.7,4.699,54.4,73.8,65.5,5.511,53.4,75.8,53.5,4.746,43.7,63.1
+Educational attainment (25 years and over),,,,,,,,,,,,,
+   < High school,United States,47.3,4.169,39,55.8,44,3.848,36.3,51.9,53.9,4.472,44.7,62.8
+   High school (including GED or equivalent),United States,52.8,5.611,41.3,64,51,5.888,39.1,62.7,38.7,3.917,31,46.9
+   Some college or AA degree,United States,56.8,5.628,45.2,67.8,49.7,4.819,40,59.4,52.2,3.926,44.2,60.1
+   College graduate or above,United States,56.2,7.01,41.6,69.8,47.2,6.397,34.6,60.2,54.7,6.563,41.2,67.5
+Family income (percent poverty guidelines),,,,,,,,,,,,,
+   <100,United States,47.2,4.772,37.6,57,50.2,4.074,42,58.5,51.1,4.755,41.5,60.7
+   100-199,United States,58.3,4.294,49.4,66.8,40.4,5.048,30.6,50.9,46.8,6.093,34.8,59.2
+   200-399,United States,49.4,5.336,38.7,60.1,58.2,7.87,41.8,73,51.7,4.031,43.5,59.8
+   400-499,United States,58.1,9.01,38.1,75.8,40.7,10.41,21.7,63,40.3,6.819,27.1,55.1
+   500+,United States,58.7,6.597,44.8,71.4,39.8,8.548,24,58,59.7,4.992,49.2,69.5
+Country of birth,,,,,,,,,,,,,
+   US,United States,52.5,3.231,45.9,59,49.7,3.612,42.4,57,50,2.969,44,56.1
+   Outside US,United States,55.4,6.213,42.5,67.6,43.1,6.053,31.3,55.7,51.9,3.517,44.7,59.1
+Disability status (20 years and over),,,,,,,,,,,,,
+   People with activity limitations,United States,60.6,4.226,51.7,68.8,49.7,4.76,40.1,59.3,57.2,3.988,48.9,65.1
+   People without activity limitations,United States,51.3,3.422,44.3,58.2,47.3,4.706,38,56.9,47.7,2.64,42.3,53.1
+Health insurance status (<65 years),,,,,,,,,,,,,
+   Insured,United States,52,3.786,44.3,59.6,49.2,5.507,38.2,60.3,51.6,3.036,45.4,57.8
+      Private,United States,50.1,4.293,41.4,58.7,49.5,6.645,36.3,62.8,47.9,3.63,40.5,55.3
+   Uninsured,United States,49,5.208,38.4,59.7,36.7,5.51,26.2,48.6,42.9,5.246,32.5,54
+      Public,United States,58.2,4.947,47.8,67.9,48.4,6.66,35.2,61.8,59.5,4.728,49.5,68.8
+Marital status (20 years and over),,,,,,,,,,,,,
+   Married,United States,53.5,3.845,45.7,61.2,46.2,4.601,37.1,55.6,50,3.155,43.6,56.4
+   Cohabiting partner,United States,63.6,9.373,38.1,83.2,52.8,8.657,32.4,72.4,50.5,5.796,38.1,62.8
+   Divorced or separated,United States,46.4,4.975,36.4,56.6,58.5,5.108,47.8,68.4,45.1,4.777,35.7,55
+   Widowed,United States,60.3,16.647,26.8,86.3,DSU,,,,23,3.254,17,30.4
+   Never married,United States,59.8,6.84,44.6,73.3,41.2,6.178,29.2,54.3,54.9,6.541,41.3,67.7
+Veteran status [3],,,,,,,,,,,,,
+   Veteran,United States,61,10.48,38.7,79.5,---,0,0,0,59.7,8.698,41.4,75.7
+   Non-veteran,United States,52.3,2.739,46.7,57.8,---,0,0,0,49.8,2.394,44.9,54.6
+Obesity status (20 years and over),,,,,,,,,,,,,
+   Obese,United States,52.7,3.395,45.8,59.6,49.3,4.383,40.5,58.1,49.8,2.515,44.7,55
+   Not obese,United States,54.2,4.262,45.5,62.7,47.2,5.713,36,58.8,51.3,4.807,41.6,60.9
+,,,,,,,,,,,,,
+Footnotes:,,,,,,,,,,,,,
+[1]: Target has been revised. See Data Details for more information.,,,,,,,,,,,,,
+[2]: Baseline has been revised. See Data Details for more information.,,,,,,,,,,,,,
+[3]: Data for Veteran status may not be comparable across years; the question changed in the 2011-2012 cycle.,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+Sources:,,,,,,,,,,,,,
+"National Health and Nutrition Examination Survey (NHANES), CDC/NCHS
+",,,,,,,,,,,,,
+,,,,,,,,,,,,,
+Additional Footnotes:,,,,,,,,,,,,,
+† Target is not applicable for this population group.,,,,,,,,,,,,,
+§ This population group is not age adjusted.,,,,,,,,,,,,,
+"DSU: Data do not meet the criteria for statistical reliability, data quality, or confidentiality.",,,,,,,,,,,,,
+DNC: Data for specific population not collected.,,,,,,,,,,,,,
+CI: 95% confidence interval.,,,,,,,,,,,,,
+Data are subject to revision and may have changed since a previous release.,,,,,,,,,,,,,
+"Unless noted otherwise, any age-adjusted data are adjusted using the year 2000 standard population.",,,,,,,,,,,,,
+Data are not available or not collected for populations not shown.,,,,,,,,,,,,,
