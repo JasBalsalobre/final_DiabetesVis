@@ -53,7 +53,7 @@ ggplot() +
   geom_line(data = price, aes(x = Date, y=PercentInc, color = "steelblue2"), size = 1)+
   geom_line(data = inflation, aes(x = cpi.Year, y = percent*100, color = "black"), size = 0.7)+
   geom_point(data = inflation, aes(x = cpi.Year, y = percent*100), size = 2)+
-  ggtitle("Increase in Humalog Insulin List Price per Prescription")+
+  ggtitle("Increase in Humalog Insulin List Price per Vial")+
   xlab("Year")+ ylab("Percent Increase")+
   scale_y_continuous(labels=function(x) paste0(x,"%"))+
   annotate("text", x=as.Date("2016-07-05"), y=1203, hjust = 1.5,
@@ -204,7 +204,7 @@ ggplot(yearly, aes(x = year, y = cost))+
   geom_line(color = "steelblue2", size = 2.5)+
   geom_text(aes(label=paste0("$", cost)), vjust = 0.12)+
   ylab("Cost (USD)")+xlab("Year")+
-  ggtitle("Average Insulin Point of Sale Price per Month")+
+  ggtitle("Average Insulin Point of Sale Price per Prescription")+
   scale_y_continuous(labels=function(x) paste0("$",x)) +
   theme_minimal()+
   theme(text=element_text(size=15, family="serif"))
