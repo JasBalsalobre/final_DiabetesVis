@@ -94,7 +94,7 @@ ggplot(killy)+
   geom_line(aes(x = year, y = RD, color = "hotpink2"), size = 1)+
   geom_point(aes(x = year, y = COS), color = "steelblue2", size = 2)+
   geom_line(aes(x = year, y = COS, color = "steelblue2"), size = 1)+
-  ylab("Amount in USD")+xlab("Year")+
+  ylab("Amount in USD (in millions)")+xlab("Year")+
   ggtitle("Eli Lilly Financial Data")+
   scale_x_continuous(breaks = scales::pretty_breaks(n = 10))+
   scale_y_continuous(labels=function(x) paste0("$",x)) +
