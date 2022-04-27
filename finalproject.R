@@ -3,12 +3,13 @@
 
 #data_sources
 #plot 1: 
-#insulin price - https://insulin.substack.com/p/the-price-of-insulin-vs-the-price?s=r
+#insulin price - https://insulin.substack.com/p/humalog-insulin-investigating-the?s=r
 #inflation - https://www.bls.gov/data/#prices
 
-#https://healthcostinstitute.org/diabetes-and-insulin/price-of-insulin-prescription-doubled-between-2012-and-2016
+#plot 2
+#eli lilly finances - https://insulin.substack.com/p/humalog-insulin-investigating-the?s=r
 
-#plot 2:
+#plot 3
 #insurance status - https://www.healthypeople.gov/2020/data-search/Search-the-Data?nid=4123
 
 #plot 4:
@@ -17,29 +18,27 @@
 #plot 5:
 #OOP cost per year: https://healthcostinstitute.org/diabetes-and-insulin/price-of-insulin-prescription-doubled-between-2012-and-2016
 
-# Libraries ---------------------------------------------------------------
-library(plyr,quietly=TRUE, warn.conflicts=FALSE)
+# Libraries---------------------------------------------------------------
+
 library(ggplot2)
 library(dplyr)
-library(reshape2)
+library(reshape)
 library(cluster)
+library(ggrepel)
 
 # plot 1: price data ------------------------------------------------------
 
-cost = read.csv('POS_prices.csv') 
-ave_cost = data.frame(aggregate(cost[3], list(cost$year), FUN=mean) )
+#humalog list price increase
+price <- read.table('humalog.txt', sep = "\t", header = TRUE)
+colnames(price) <- c("Date", "Price", "PercentInc")
+price$Price = as.numeric(gsub("[$]", "", price$Price))
+price$PercentInc = as.numeric(gsub("[%]", "", price$PercentInc))
+price$Date = as.Date(price$Date, "%Y/%m/%d")
 
-price = read.csv('substack_pricedata.csv')
-colnames(price)[1] = "year"
-range = 1:length(price$year)
-
-#find percent increase
-for (i in range) {
-  price$percent[i] = (price$price[i]-price$price[1])/price$price[1]
-}
+range = 1:length(price$Date)
 
 #CPI data
-cpi = read.csv('CPI.csv',
+cpi <- read.csv('CPI.csv',
                skip = 11)
 inflation = data.frame(cpi$Year, cpi$Annual)
 range2 = 1:length(cpi$Year)
@@ -47,14 +46,71 @@ range2 = 1:length(cpi$Year)
 for (i in range2) {
   inflation$percent[i] = (inflation$cpi.Annual[i]-inflation$cpi.Annual[1])/inflation$cpi.Annual[1]
 }
+inflation$cpi.Year <- as.Date(paste0(inflation$cpi.Year, "-01-01"))
 
 ggplot() +
-  geom_line(data = price, aes(x = year, y = percent), color = "orange", size = 1) +
-  geom_line(data = inflation, aes(x = cpi.Year, y = percent))+
-  ggtitle("Increase in List Price for Insulin")
+  geom_point(data = price, aes(x = Date, y = PercentInc, ),color = "steelblue2", size = 3) +
+  geom_line(data = price, aes(x = Date, y=PercentInc, color = "steelblue2"), size = 1)+
+  geom_line(data = inflation, aes(x = cpi.Year, y = percent*100, color = "black"), size = 0.7)+
+  geom_point(data = inflation, aes(x = cpi.Year, y = percent*100), size = 2)+
+  ggtitle("Increase in Humalog Insulin List Price per Prescription")+
+  xlab("Year")+ ylab("Percent Increase")+
+  scale_y_continuous(labels=function(x) paste0(x,"%"))+
+  annotate("text", x=as.Date("2016-07-05"), y=1203, hjust = 1.5,
+           label = "$276.62", color = "steelblue", size = 5)+
+  annotate("segment", x = as.Date("2015-05-05"), xend = as.Date("2016-05-05"), 
+           y = 1203, yend = 1203, colour = "steelblue") +
+  annotate("text", x=as.Date("1996-07-21"), y=0, hjust = 0.5, vjust = -2,
+         label = "$21.23", color = "steelblue", size = 5)+
+  annotate("segment", x = as.Date("1996-07-21"), xend = as.Date("1996-07-21"), 
+           y = 85, yend = 15, colour = "steelblue") +
+  annotate("text", x=as.Date("2016-06-01"), y=56, hjust = 0.3, vjust = -2,
+           label = "$32.48", color = "black", size = 5)+
+  annotate("segment", x = as.Date("2017-01-01"), xend = as.Date("2017-01-01"), 
+           y = 130, yend = 60, colour = "black") +
+  scale_color_identity(guide = "legend",
+                       breaks=c('steelblue2', 'black'),
+                       labels=c('Insulin List Price', 'Inflation'))+
+  theme(text=element_text(size=15, family="serif"), legend.position = c(0.2,0.85), 
+        legend.title = element_blank(),
+        legend.text = element_text(family="sans", size=10),
+        legend.background = element_rect(fill="grey95", size=0.7, 
+                                         linetype="solid", colour ="grey69"))
+        
+  
 
+# plot 2: eli lilly finances ----------------------------------------------
 
-# plot 2: a1c vs uninsured status ------------------------------------------------------------------
+eldf <- read.table('eli_lilly.txt', sep = '\t', header = TRUE)
+killy <- eldf[, c(2,3,5,7)]
+killy[] <- lapply(killy, gsub, pattern=',', replacement='')
+killy <- mutate_all(killy, function(x) as.numeric(as.character(x)))
+colnames(killy) <- c("year", "revenue", "RD", "COS")
+
+ggplot(killy)+
+  geom_point(aes(x = year, y = revenue), color = "palegreen3", size = 2)+
+  geom_line(aes(x = year, y = revenue, color = "palegreen3"), size = 1)+
+  geom_point(aes(x = year, y = RD), color = "hotpink2", size = 2)+
+  geom_line(aes(x = year, y = RD, color = "hotpink2"), size = 1)+
+  geom_point(aes(x = year, y = COS), color = "steelblue2", size = 2)+
+  geom_line(aes(x = year, y = COS, color = "steelblue2"), size = 1)+
+  ylab("Amount in USD")+xlab("Year")+
+  ggtitle("Eli Lilly Financial Data")+
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 10))+
+  scale_y_continuous(labels=function(x) paste0("$",x)) +
+  
+  scale_color_identity(guide = "legend",
+                       breaks=c('palegreen3', 'hotpink2', 'steelblue2'),
+                       labels=c('Revenue', "R&D", "Cost of Sales"))+
+
+  theme(text=element_text(size=15, family="serif"), legend.position = c(0.85,0.5), 
+        legend.title = element_blank(),
+        legend.text = element_text(family="sans", size=10),
+        legend.background = element_rect(fill="grey95", size=0.7, 
+                                         linetype="solid", colour ="grey69"))
+  
+
+# plot 3: a1c vs uninsured status ------------------------------------------------------------------
 
 #value = percentage of people with diabetes
 
@@ -92,45 +148,16 @@ a1clabeller <- function(variable,value){
 ggplot(a1c, aes(x = variable, y = value, fill = status))+
   geom_bar(stat = "identity", position = "dodge")+
   facet_grid(a1c ~ ., labeller = a1clabeller) +
-  ggtitle("Insurance Status by HbA1c")
+  labs(fill='Insurance Status') +
+  ylab("Percentage of Diabetics")+xlab("Years")+
+  scale_y_continuous(labels=function(x) paste0(x,"%"))+
+  scale_fill_manual(values=c("#FF6666", "#9999CC"))+
+  theme(text=element_text(size=14, family="serif"),
+        legend.title = element_text(family = "sans", size = 12),
+        legend.text = element_text(family="sans", size=10))+
+  scale_x_discrete(labels=c("2005-8" = "2005-2008", "2009-12" = "2009-2012",
+                            "2013-16" = "2013-2016"))
 
-
-
-# plot 3: a1c vs race ------------------------------------------------------------------
-
-#a1c above 9
-df_race9 <- dfload[c(8,11,12),]
-
-collabel2 <- c("race", "country", "2005-8", "StdErr",	"LowerCI",	"UpperCI", "2009-12", 
-             "StdErr",	"LowerCI",	"UpperCI", "2013-16", "StdErr",	"LowerCI",	"UpperCI")
-
-colnames(df_race9) <- collabel2
-
-r_a1c9 = df_race9[,c(1, 3, 7, 11)]
-r_a1c9$a1c = c(">9", ">9", ">9")
-
-#a1c below 7
-df_race7 <- df2load[c(8,11,12),]
-colnames(df_race7) <- collabel2
-
-r_a1c7 = df_race9[,c(1, 3, 7, 11)]
-r_a1c7$a1c = c("<7", "<7", "<7")
-
-#bind and melt data
-r_a1c <- rbind(r_a1c9, r_a1c7)
-
-r_a1c = melt(r_a1c, id.vars = c('race', 'a1c') )
-r_a1c$value = as.numeric(r_a1c$value)
-
-a1c_names = list("<7" = "HbA1c under 7.0%", ">9" = "HbA1c above 9.0%")
-a1clabeller <- function(variable,value){
-  return(a1c_names[value])
-}
-
-ggplot(r_a1c, aes(x = variable, y = value, fill = race))+
-  geom_bar(stat = "identity", position = "dodge")+
-  facet_grid(a1c ~ ., labeller = a1clabeller) +
-  ggtitle("Race vs HbA1c")
 
 # plot 4: countries with highest insulin prices ------------------------------------------------------------------
 
@@ -152,33 +179,33 @@ ordered <- countrydf[order(countrydf$Analog, decreasing = TRUE),]
 top10 =  head(ordered, 10)
 top10$Country = reorder(top10$Country, top10$Analog)
 
-
 ggplot(top10, aes(x = Country, y = Analog, fill = Country))+
   geom_bar(stat = "identity")+
   geom_text(aes(label=paste0("$", Analog)), position=position_dodge(width=0.9), hjust=0)+
   scale_fill_brewer(palette="Set3")+
   coord_flip()+
   ggtitle("Countries with Highest Analog Insulin Price")+
-  ylab("Price per Standard Unit (USD)")+
+  ylab("Price per Standard Quantity (USD)")+
+  scale_y_continuous(labels=function(x) paste0("$",x)) +
   theme_bw()+
-  theme(text=element_text(size=15, family="sans"), legend.position = "none")
-        
-        
-        #plot.background = element_rect(fill = "pink2"))
+  theme(text=element_text(size=15, family="serif"), legend.position = "none")
   
-
-
-#add dollar labels, remove legend, add titles
-
 # plot 5: oop cost of insulin------------------------------------------------------------------
 
 oop <- read.csv('POS_prices.csv')
+ave_cost = data.frame(aggregate(oop[3], list(oop$year), FUN=mean) )
 
 yearly <- summarize(group_by(oop, year),
                     cost = mean(Average_Point.of.Sale_Price_per_Script))
 yearly <- trunc(yearly)
 
 ggplot(yearly, aes(x = year, y = cost))+
-  geom_point(shape = 21)+
-  geom_line()+
-  geom_text(aes(label=paste0("$", cost)), vjust = -1)
+  geom_point(shape = 21, fill = "steelblue2", color = "black", size = 15)+
+  geom_line(color = "steelblue2", size = 2.5)+
+  geom_text(aes(label=paste0("$", cost)), vjust = 0.12)+
+  ylab("Cost (USD)")+xlab("Year")+
+  ggtitle("Average Insulin Point of Sale Price per Month")+
+  scale_y_continuous(labels=function(x) paste0("$",x)) +
+  theme_minimal()+
+  theme(text=element_text(size=15, family="serif"))
+
